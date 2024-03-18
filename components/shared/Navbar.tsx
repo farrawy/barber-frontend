@@ -3,9 +3,16 @@ import React from "react";
 import AcmeLogo from "@/public/images/trimmer.png";
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
-const Navbar: React.FC = () => {
+interface NavbarProps {}
+
+const Navbar: React.FC<NavbarProps> = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const theme = useTheme();
+  const strokeColor = theme.resolvedTheme === "dark" ? "#fff" : "#000";
+
+  console.log("theme", theme.resolvedTheme, strokeColor);
 
   const navbar = {
     brand: {
@@ -42,12 +49,12 @@ const Navbar: React.FC = () => {
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 {navbar.items.map((item) => (
-                  <a
+                  <Link
                     key={item.label}
                     href={item.href}
                     className=" px-3 py-2 rounded-md text-sm font-medium">
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -57,12 +64,12 @@ const Navbar: React.FC = () => {
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
               {navbar.cta.map((item) => (
-                <a
+                <Link
                   key={item.label}
                   href={item.href}
                   className=" text-white px-3 py-2 rounded-md text-sm font-medium">
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -82,7 +89,7 @@ const Navbar: React.FC = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="#000"
+                  stroke={strokeColor}
                   aria-hidden="true">
                   <path
                     strokeLinecap="round"
@@ -97,7 +104,7 @@ const Navbar: React.FC = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="#000"
+                  stroke={strokeColor}
                   aria-hidden="true">
                   <path
                     strokeLinecap="round"
@@ -114,24 +121,24 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu (Conditional) */}
       {isMenuOpen && (
         <div
-          className="md:hidden absolute top-16 left-0  w-full bg-white z-20 m-0 p-0"
+          className="md:hidden absolute top-16 left-0  w-full bg-white dark:bg-background z-20 m-0 p-0"
           id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navbar.items.map((item) => (
-              <a
+              <Link
                 key={item.label}
                 href={item.href}
                 className="block px-3 py-2 rounded-md text-base font-medium">
                 {item.label}
-              </a>
+              </Link>
             ))}
             {navbar.cta.map((item) => (
-              <a
+              <Link
                 key={item.label}
                 href={item.href}
-                className="block text-black px-3 py-2 rounded-md text-base font-medium">
+                className="block px-3 py-2 rounded-md text-base font-medium">
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

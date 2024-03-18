@@ -24,10 +24,12 @@ const HeroSection = () => {
           Discover our exceptional services and book your next haircut today.
         </p>
         <div className="mt-8 flex flex-row gap-4">
-          <Button variant="default" className="bg-black text-white">
+          <Button variant="default" className="bg-white text-black">
             Book Now
           </Button>
-          <Button variant="outline" className="bg-transparent border-white">
+          <Button
+            variant="outline"
+            className=" border-white bg-transparent text-white">
             Learn More
           </Button>
         </div>
