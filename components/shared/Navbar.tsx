@@ -1,29 +1,32 @@
 "use client";
 import React from "react";
-import AcmeLogo from "@/public/images/trimmer.png";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
+import { Button } from "../ui/button";
 
 interface NavbarProps {}
 
 const Navbar: React.FC<NavbarProps> = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const theme = useTheme();
-  const strokeColor = theme.resolvedTheme === "dark" ? "#fff" : "#000";
-
-  console.log("theme", theme.resolvedTheme, strokeColor);
+  const { resolvedTheme } = useTheme();
+  const strokeColor = resolvedTheme === "dark" ? "#fff" : "#000";
+  const logo =
+    resolvedTheme === "dark"
+      ? "/images/trimmer-white.png"
+      : "/images/trimmer.png";
 
   const navbar = {
     brand: {
-      logo: AcmeLogo,
+      logo: logo,
       name: "BARBOOR",
     },
     items: [
       { label: "About Us", href: "/about-us" },
       { label: "Services", href: "/services" },
       { label: "Gallery", href: "/gallery" },
-      { label: "Book Now", href: "/book-now" },
+      { label: "Book Now", href: "/appointment" },
     ],
     cta: [{ label: "Login", href: "/login" }],
   };
@@ -64,12 +67,12 @@ const Navbar: React.FC<NavbarProps> = () => {
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
               {navbar.cta.map((item) => (
-                <Link
+                <Button
                   key={item.label}
-                  href={item.href}
-                  className=" text-white px-3 py-2 rounded-md text-sm font-medium">
+                  className="  px-3 py-2 rounded-md text-sm font-medium"
+                  variant="default">
                   {item.label}
-                </Link>
+                </Button>
               ))}
             </div>
           </div>

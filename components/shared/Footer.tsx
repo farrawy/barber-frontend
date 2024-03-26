@@ -88,7 +88,7 @@ const Footer: React.FC<FooterProps> = ({ config }) => {
           orientation="horizontal"
           className="bg-secondary-foreground h-px w-full my-4"
         />
-        <div className="flex items-center justify-between mt-8">
+        <div className="flex flex-col sm:flex-row gap-2 items-center justify-between mt-8">
           <div className="text-base font-medium ">
             &copy; {year} {brandName}. All rights reserved.
           </div>
@@ -97,14 +97,14 @@ const Footer: React.FC<FooterProps> = ({ config }) => {
               <Link
                 key={policy.label}
                 href={policy.href}
-                className="text-base font-medium ">
+                className="text-base font-medium underline">
                 {policy.label}
               </Link>
             ))}
           </div>
         </div>
 
-        {isPremium && (
+        {!isPremium && (
           <div className="flex items-center justify-center mt-8">
             <span className="text-base font-medium ">
               Powered by{" "}
